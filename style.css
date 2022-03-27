@@ -98,5 +98,7 @@ body {
   border-radius: 5px;
 }
 
-
+.grid {
+  display: inline-block;
+}
   

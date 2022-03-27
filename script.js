@@ -13,12 +13,27 @@ var store = window.localStorage;
 
 var now = moment(); 
 
-//funtion to highlight current hour
-function(){
+var row = $("#row")
 
-}
+var currentHour = $("#currentHour")
+
+var textBox = $("#textBox")
+
+var saveButton = $("#SaveButton")
+
+//funtion to highlight current hour
+// function color(time){
+//   return time.text === currentHour.text
+//     ? "bg-danger"
+//     : time.hour < now
+//     ? "bg-secondary"
+//     : "bg-success";
+// }
 
 //function to save text in text box
-
 //make a functional button to save
-
+saveButton.on("click", function(){
+  console.log(this);
+  var text = $(this).siblings(textBox).val();
+  var time = $(this).parent().attr("id")
+})

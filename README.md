@@ -7,6 +7,6 @@ HTML code uses bootstrap to make the rows that consist of the time, textbox and 
 JS code uses moment.js to keep track of time
 Use JQuery to get familiar with it just in case we run into it in the future
 
-![Screenshot of Applicationm]()
+![Screenshot of Applicationm](day-scheduler-screenshot.png)
 
 [Work Day Generator](https://rafaelh731.github.io/work-day-scheduler/)

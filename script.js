@@ -9,21 +9,20 @@ $("#day").text(today.format("MMMM Do YYYY, h:mm:ss a"));
 var currentTime = {text: moment().format("h:00 A"), hour: moment().hour()};
 console.log(currentTime)
 
-//var store = window.localStorage;
-
 var now = moment(); 
 
-var row = $("#row")
+var rowEl = $("#row")
+// console.log(row);
 
-var currentHour = $(".currentHour")
+var currentHourEl = $(".currentHour")
 
-var textBox = $(".textBox")
+var textBoxEL = $(".textBox")
 
-var saveButton = $(".saveButton")
+var saveButtonEl = $(".saveButton")
 
 //funtion to highlight current hour, in progess
 function color(time){
-  return time.hour === row.text
+  return time.hour === rowEl
     ? "bg-danger"
     : time.hour < now
     ? "bg-secondary"
@@ -32,8 +31,8 @@ function color(time){
 
 //another way i am trying
 
-  if (currentHour == now) {
-    $("row").css({ "background-color": "#5E5B52"
+  if (currentTime.hour === now) {
+    $(rowEl).css({ "background-color": "#5E5B52"
 
     })
   }
@@ -41,27 +40,48 @@ function color(time){
 
 //function to save text in text box
 //make a functional button to save
- $(".saveButton").on("click", function () {
-        //get nearby values.
-        console.log(this);
-        var text = $(this).siblings(".textBox").val(); 
-        var time = $(this).parent().attr("id"); 
+ saveButtonEl.on("click", function (e) {
+  var target = e.target;
+  var parent =  $(target).parent();
+  var id = $(parent).attr('id');
 
-        //set items in local storage.
-        localStorage.setItem(time, text);
+  var text1 = $(parent).find('.currentHour').html();
+  var textareaVal = $(parent).find('textarea').val();
+
+   console.log(text1, textareaVal);
+
+   var storageInfo = localStorage.getItem("localStorageInfo");
+
+   var newInfo = {};
+   if (storageInfo) {
+     storageInfo = JSON.parse(storageInfo);
+     storageInfo[id] = textareaVal;
+     newInfo = storageInfo;
+   } else {
+     newInfo[id] = textareaVal;
+   }
+
+   console.log(newInfo);
+   localStorage.setItem("localStorageInfo", JSON.stringify(newInfo));
+
     })
-//another method I could try
 
-// if (localStorage["textBox"])
-// {
-//   textBox = localStorage["textBox"];
-//   document.getElementById("textBox").value = textBox;
+    // load 
+    function loadDataFromStorage() {
+      var savedInfo = localStorage.getItem("localStorageInfo");
+      if (savedInfo) {
+        var info = JSON.parse(savedInfo);
+        var keys = Object.keys(info);
 
-// }
+        console.log(info)
+;
+        keys.forEach(key => {
+          var val = info[key];
+          //save to text 
+          $(`#${key} textarea`).val(val);
+        })
+      }
+    }
 
-// saveButton.on("click", function()
-// {
-//    textBox = document.getElementById("textBox").value ;
-//         //localStorage["user"] = user ;
-//         localStorage.setItem("textBox", textBox) ;
-// })
+    //call 
+    loadDataFromStorage();

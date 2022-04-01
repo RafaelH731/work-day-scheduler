@@ -21,22 +21,47 @@ var textBoxEL = $(".textBox")
 var saveButtonEl = $(".saveButton")
 
 //funtion to highlight current hour, in progess
-function color(time){
-  return time.hour === rowEl
-    ? "bg-danger"
-    : time.hour < now
-    ? "bg-secondary"
-    : "bg-success";
+// function color(time){
+//   return currentTime.hour === rowEl
+//     ? "bg-danger"
+//     : currentTime.hour < now
+//     ? "bg-secondary"
+//     : "bg-success";
+// }
+
+//I think this should work but I cant get it to connect
+$("rowEl").each(function () {
+  var rowHour = parseInt($(this).attr("id").split("hour")[1]);
+  console.log( rowHour, currentHour)
+  if (rowHour < currentHour) {
+    $(this).addClass("past");
+    $(this).removeClass("future");
+    $(this).removeClass("present");
 }
+else if (rowHour === currentHour) {
+    $(this).removeClass("past");
+    $(this).addClass("present");
+    $(this).removeClass("future");
+}
+else {
+    $(this).removeClass("present");
+    $(this).removeClass("past");
+    $(this).addClass("future");
+}
+})
+
+
+
+
 
 //another way i am trying
 
-  if (currentTime.hour === now) {
-    $(rowEl).css({ "background-color": "#5E5B52"
+  // if (currentTime.hour === ) {
+  //   $(rowEl).css({ "background-color": "#5E5B52"
 
-    })
-  }
-  
+  //   })
+  // }
+  // console.log(currentTime.hour)
 
 //function to save text in text box
 //make a functional button to save

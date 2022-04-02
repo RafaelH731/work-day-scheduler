@@ -11,7 +11,10 @@ console.log(currentTime)
 
 var now = moment(); 
 
-var rowEl = $("#row")
+//the plus in front converts into a number
+var currentHour = +moment().format("H")
+
+var rowEl = $(".row")
 // console.log(row);
 
 var currentHourEl = $(".currentHour")
@@ -30,8 +33,8 @@ var saveButtonEl = $(".saveButton")
 // }
 
 //I think this should work but I cant get it to connect
-$("rowEl").each(function () {
-  var rowHour = parseInt($(this).attr("id").split("hour")[1]);
+rowEl.each(function () {
+  var rowHour = parseInt($(this).attr("id"));
   console.log( rowHour, currentHour)
   if (rowHour < currentHour) {
     $(this).addClass("past");
